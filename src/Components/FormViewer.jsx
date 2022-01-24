@@ -1,19 +1,18 @@
 import React from "react";
 import PersonService from "../Classes/Person";
+import UseObservable from "../Helpers/UseObservable";
 const FormViewer = () => {
-  const [person, setPerson] = React.useState({
-    name: "",
-    surname: "",
-    gsm: "",
-    email: "",
-  });
-  //subscribes to person service and get singleton person object values
-  React.useState(() => {
-    var personSubject = PersonService.getInstance();
-    personSubject.getPerson.subscribe((person) => {
-      setPerson(person);
-    });
-  }, []);
+  const person  = UseObservable(
+    {observable:PersonService.getInstance().getPerson,initialState:{
+      name: "",
+      surname: "",
+      gsm: "",
+      email: "",
+    }}
+  );
+
+  
+
   return (
     <div>
       <table>
