@@ -6,6 +6,7 @@ const UseObservable = ({ observable, initialState }) => {
   useEffect(() => {
     const subscription = observable.subscribe(setValue);
     return () => subscription.unsubscribe();
+    // eslint-disable-next-line
   }, []);
 
   return !value ? initialState : value;
